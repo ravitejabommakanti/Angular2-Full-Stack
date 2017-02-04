@@ -12,9 +12,29 @@ export class DataService {
 
   constructor(private http: Http) { }
 
+
+  getUsers(): Observable<any> {
+    return this.http.get('/users').map(res => res.json());
+  }
+
+  addUser(user): Observable<any> {
+    console.log(user);
+    return this.http.post('/user', JSON.stringify(user), this.options);
+  }
+  editUser(user): Observable<any> {
+    return this.http.put(`/user/${user._id}`, JSON.stringify(user), this.options);
+  }
+
+  deleteUser(user): Observable<any> {
+    return this.http.delete(`/user/${user._id}`, this.options);
+  }
+
+
   getCats(): Observable<any> {
     return this.http.get('/cats').map(res => res.json());
   }
+
+
 
   addCat(cat): Observable<any> {
     return this.http.post('/cat', JSON.stringify(cat), this.options);

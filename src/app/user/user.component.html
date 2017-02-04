@@ -1,0 +1,73 @@
+<div class="card" *ngIf="isLoading">
+  <h4 class="card-header">Loading...</h4>
+  <div class="card-block text-xs-center">
+    <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
+  </div>
+</div>
+<app-toast [message]="toast.message"></app-toast>
+<div class="card" *ngIf="!isLoading">
+  <h4 class="card-header">Current users ({{users.length}})</h4>
+  <div class="card-block">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-default">
+        <tr>
+          <th>User Name</th>
+          <th>Password</th>
+          <th>is Admin</th>
+          <th>Location</th>
+          <th>userage</th>
+          <th>reach@</th>
+          <th>Create On</th>
+          <th>Updated On</th>
+          <th>Modify</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!isEditing">
+        <tr *ngFor="let user of users">
+          <td>{{user.username}}</td>
+          <td>{{user.password}}</td>
+          <td>{{user.admin}}</td>
+          <td>{{user.location}}</td>
+          <td>{{user.meta.age}}</td>
+          <td>{{user.meta.website}}</td>
+          <td>{{user.createdOn}}</td>
+          <td>{{user.updatedOn}}</td>
+          <td>
+            <button class="btn btn-sm btn-warning" (click)="enableEditing(cat)"><i class="fa fa-pencil"></i> Edit</button>            <button class="btn btn-sm btn-danger" (click)="deleteCat(cat)"><i class="fa fa-trash"></i> Delete</button>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="users.length === 0">
+        <tr>
+          <td colspan="8">There are no users in the DB. Add a new user below.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card" *ngIf="!isEditing">
+  <h4 class="card-header">Add New User</h4>
+  <div class="card-block">
+    <form class="form" [formGroup]="addUserForm" (ngSubmit)="createUser()" style="text-align:center">
+      <div class="form-group">
+        <input class="form-control" type="text" name="username" formControlName="username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="password" formControlName="password" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="admin" formControlName="admin" placeholder="isAdmin">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="location" formControlName="location" placeholder="Location">
+      </div>
+      <!--<div class="form-group">
+        <input class="form-control" type="text" name="userage" formControlName="userage" placeholder="Age">
+      </div>-->
+      <div class="form-group">
+        <input class="form-control" type="text" name="website" formControlName="website" placeholder="Reach me">
+      </div>
+      <button class="btn btn-primary btn-block" type="submit" [disabled]="!addUserForm.valid"><i class="fa fa-floppy-o"></i> Add User</button>
+    </form>
+  </div>
+</div>

@@ -7,13 +7,15 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { UserComponent } from './user/user.component';
 import { DataService } from './services/data.service';
 
 import { ToastComponent } from './shared/toast/toast.component';
 
 const routing = RouterModule.forRoot([
-    { path: '',      component: HomeComponent },
-    { path: 'about', component: AboutComponent }
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'user', component: UserComponent }
 ]);
 
 @NgModule({
@@ -21,6 +23,7 @@ const routing = RouterModule.forRoot([
     AppComponent,
     HomeComponent,
     AboutComponent,
+    UserComponent,
     ToastComponent
   ],
   imports: [
